@@ -5,6 +5,19 @@ window.onload = function() {
 
   const c = CANVAS.getContext('2d');
 
+  function Circle(x, y) {
+    this.x = x;
+    this.y = y;
+
+    this.draw = function() {
+      c.beginPath();
+      c.arc(x, y, radius, 0, Math.PI * 2, true);
+      c.fill();
+    }
+  }
+
+  let circle = new Circle(200, 200);
+
   let x = Math.random() * innerWidth; //starting point of circle on x-axis
   let y = Math.random() * innerHeight; //starting poing of circle on y-axis
   let dx = (Math.random() - 0.5) * 8; //velocity on x-axis
@@ -14,7 +27,6 @@ window.onload = function() {
   function animate() {
     requestAnimationFrame(animate);
     c.clearRect(0, 0, innerWidth, innerHeight); //clears canvas for every animate
-
     c.beginPath();
     c.arc(x, y, radius, 0, Math.PI * 2, true);
     c.fill();
