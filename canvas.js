@@ -15,7 +15,7 @@ window.onload = function() {
     this.draw = function() {
       c.beginPath();
       c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
-      c.fill();
+      c.stroke();
     }
 
     this.update = function() {
@@ -30,24 +30,31 @@ window.onload = function() {
       this.x += this.dx;
       this.y += this.dy;
 
-      circle.draw();
+      this.draw();
     }
   }
 
-  let circle = new Circle(200, 200, 3, 3, 30);
+  let circleArr = [];
 
-  let x = Math.random() * innerWidth; //starting point of circle on x-axis
-  let y = Math.random() * innerHeight; //starting poing of circle on y-axis
-  let dx = (Math.random() - 0.5) * 8; //velocity on x-axis
-  let dy = (Math.random() - 0.5) * 8; //velocity on y-axis
-  let radius = 20;
+  for (let i = 0; i < 50; i++) {
+    let x = Math.random() * innerWidth; //starting point of circle on x-axis
+    let y = Math.random() * innerHeight; //starting poing of circle on y-axis
+    let dx = (Math.random() - 0.5) * 8; //velocity on x-axis
+    let dy = (Math.random() - 0.5) * 8; //velocity on y-axis
+    let radius = 20;
+
+    circleArr.push(new Circle(x, y, dx, dy, radius));
+  }
 
   function animate() {
     requestAnimationFrame(animate);
     c.clearRect(0, 0, innerWidth, innerHeight); //clears canvas for every animate
-    c.beginPath();
+    
+    for (let i = 0; i < circleArr.length; i++) {
+      circleArr[i].update();
+    }
 
-    circle.update();
+    // circle.update();
   }
 
   animate();
