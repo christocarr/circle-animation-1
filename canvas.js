@@ -5,18 +5,36 @@ window.onload = function() {
 
   const c = CANVAS.getContext('2d');
 
-  function Circle(x, y) {
+  function Circle(x, y, dx, dy, radius) {
     this.x = x;
     this.y = y;
+    this.dx = dx;
+    this.dy = dy;
+    this.radius = radius;
 
     this.draw = function() {
       c.beginPath();
-      c.arc(x, y, radius, 0, Math.PI * 2, true);
+      c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
       c.fill();
+    }
+
+    this.update = function() {
+      if (this.x + this.radius > innerWidth || this.x - this.radius < 0) {
+        this.dx = -this.dx;
+      }
+
+      if (this.y + this.radius > innerHeight || this.y - this.radius < 0) {
+        this.dy = -this.dy;
+      }
+  
+      this.x += this.dx;
+      this.y += this.dy;
+
+      circle.draw();
     }
   }
 
-  let circle = new Circle(200, 200);
+  let circle = new Circle(200, 200, 3, 3, 30);
 
   let x = Math.random() * innerWidth; //starting point of circle on x-axis
   let y = Math.random() * innerHeight; //starting poing of circle on y-axis
@@ -28,19 +46,8 @@ window.onload = function() {
     requestAnimationFrame(animate);
     c.clearRect(0, 0, innerWidth, innerHeight); //clears canvas for every animate
     c.beginPath();
-    c.arc(x, y, radius, 0, Math.PI * 2, true);
-    c.fill();
 
-    if (x + radius > innerWidth || x - radius < 0) {
-      dx = -dx;
-    }
-    if (y + radius > innerHeight || y - radius < 0) {
-      dy = -dy;
-    }
-
-    x += dx;
-    y += dy;
-
+    circle.update();
   }
 
   animate();
