@@ -37,11 +37,11 @@ window.onload = function() {
   let circleArr = [];
 
   for (let i = 0; i < 50; i++) {
-    let x = Math.random() * innerWidth; //starting point of circle on x-axis
-    let y = Math.random() * innerHeight; //starting poing of circle on y-axis
+    let radius = 20;
+    let x = Math.random() * (innerWidth - radius * 2) + radius; //starting point of circle on x-axis
+    let y = Math.random() * (innerHeight - radius * 2) + radius; //starting poing of circle on y-axis
     let dx = (Math.random() - 0.5) * 8; //velocity on x-axis
     let dy = (Math.random() - 0.5) * 8; //velocity on y-axis
-    let radius = 20;
 
     circleArr.push(new Circle(x, y, dx, dy, radius));
   }
