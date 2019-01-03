@@ -5,6 +5,16 @@ window.onload = function() {
 
   const c = CANVAS.getContext('2d');
 
+  mousePos = {
+    x: undefined,
+    y: undefined
+  }
+
+  window.addEventListener('mousemove', function(ev) {
+    mousePos.x = ev.x;
+    mousePos.y = ev.y;
+  });
+
   function Circle(x, y, dx, dy, radius, color) {
     this.x = x;
     this.y = y;
@@ -16,7 +26,7 @@ window.onload = function() {
     this.draw = function() {
       c.beginPath();
       c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
-      c.strokeStyle = '#' + this.color;
+      c.strokeStyle = this.color;
       c.stroke();
     }
 
@@ -44,10 +54,9 @@ window.onload = function() {
     let y = Math.random() * (innerHeight - radius * 2) + radius; //starting poing of circle on y-axis
     let dx = (Math.random() - 0.5) * 8; //velocity on x-axis
     let dy = (Math.random() - 0.5) * 8; //velocity on y-axis
-    let color = Math.floor(Math.random()*16777215).toString(16);
+    let color = '#' + Math.floor(Math.random()*16777215).toString(16);
 
     circleArr.push(new Circle(x, y, dx, dy, radius, color));
-    console.log(circleArr);
   }
 
   function animate() {
