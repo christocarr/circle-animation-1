@@ -42,6 +42,12 @@ window.onload = function() {
       this.x += this.dx;
       this.y += this.dy;
 
+      //mouse interactivity
+      if (mousePos.x - this.x < 50 && mousePos.x - this.x > -50
+        && mousePos.y - this.y < 50 && mousePos.y - this.y > -50) {
+        this.radius += 1;
+      }
+
       this.draw();
     }
   }
