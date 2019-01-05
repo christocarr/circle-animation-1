@@ -5,6 +5,8 @@ window.onload = function() {
 
   const c = CANVAS.getContext('2d');
 
+  const maxRadius = 50;
+
   mousePos = {
     x: undefined,
     y: undefined
@@ -43,9 +45,13 @@ window.onload = function() {
       this.y += this.dy;
 
       //mouse interactivity
-      if (mousePos.x - this.x < 50 && mousePos.x - this.x > -50
-        && mousePos.y - this.y < 50 && mousePos.y - this.y > -50) {
-        this.radius += 1;
+      if (mousePos.x - this.x < 50 && mousePos.x - this.x > -50 
+          && mousePos.y - this.y < 50 && mousePos.y - this.y > -50) {
+            if (this,radius < maxRadius) {
+              this.radius += 1;
+            }
+      } else if (this.radius > 2) {
+        this.radius -= 1;
       }
 
       this.draw();
