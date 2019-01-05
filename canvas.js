@@ -17,6 +17,11 @@ window.onload = function() {
     mousePos.y = ev.y;
   });
 
+  window.addEventListener('resize', function() {
+    CANVAS.width = window.innerWidth;
+    CANVAS.height = window.innerHeight;
+  })
+
   function Circle(x, y, dx, dy, radius, color) {
     this.x = x;
     this.y = y;
