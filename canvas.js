@@ -5,7 +5,7 @@ window.onload = function() {
 
   const c = CANVAS.getContext('2d');
 
-  const maxRadius = 50;
+  const maxRadius = 70;
 
   mousePos = {
     x: undefined,
@@ -23,6 +23,7 @@ window.onload = function() {
     this.dx = dx;
     this.dy = dy;
     this.radius = radius;
+    this.minRadius = radius;
     this.color = color;
 
     this.draw = function() {
@@ -45,12 +46,12 @@ window.onload = function() {
       this.y += this.dy;
 
       //mouse interactivity
-      if (mousePos.x - this.x < 50 && mousePos.x - this.x > -50 
-          && mousePos.y - this.y < 50 && mousePos.y - this.y > -50) {
-            if (this,radius < maxRadius) {
+      if (mousePos.x - this.x < 70 && mousePos.x - this.x > -70 
+          && mousePos.y - this.y < 70 && mousePos.y - this.y > -70) {
+            if (this.radius < maxRadius) {
               this.radius += 1;
             }
-      } else if (this.radius > 2) {
+      } else if (this.radius > this.minRadius) {
         this.radius -= 1;
       }
 
@@ -60,12 +61,12 @@ window.onload = function() {
 
   let circleArr = [];
 
-  for (let i = 0; i < 50; i++) {
-    let radius = (Math.random() * 20) + 5;
+  for (let i = 0; i < 120; i++) {
+    let radius = (Math.random() * 20) + 10;
     let x = Math.random() * (innerWidth - radius * 2) + radius; //starting point of circle on x-axis
     let y = Math.random() * (innerHeight - radius * 2) + radius; //starting poing of circle on y-axis
-    let dx = (Math.random() - 0.5) * 8; //velocity on x-axis
-    let dy = (Math.random() - 0.5) * 8; //velocity on y-axis
+    let dx = (Math.random() - 0.5) * 4; //velocity on x-axis
+    let dy = (Math.random() - 0.5) * 4; //velocity on y-axis
     let color = '#' + Math.floor(Math.random()*16777215).toString(16);
 
     circleArr.push(new Circle(x, y, dx, dy, radius, color));
